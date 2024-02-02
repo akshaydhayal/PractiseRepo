@@ -1,9 +1,18 @@
 const express=require("express");
 
 const app=express();
-
-app.get("/",(req,res)=>{
-    res.send("hello world!!");
+function calculateSum(n){
+    let total=0;
+    for(let i=0; i<=n; i++){
+        total+=i;
+    }
+    return total;
+}
+app.get("/:any",(req,res)=>{
+    console.log(req.params.any);
+    let ans=calculateSum(req.query.counter);
+    let str="hello world and sum is : "+ans;
+    res.send(str);
 })
 
 app.listen(3000,()=>{
