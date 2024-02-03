@@ -26,6 +26,7 @@ app.get("/:any",(req,res)=>{
     let str="hello world and sum is : "+ans;
     // res.status(201).send(str);
 
+    // res.sendFile(__dirname+"/index.html");
     res.status(202).json({msg:"success"})
 })
 
