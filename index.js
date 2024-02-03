@@ -24,7 +24,9 @@ app.get("/:any",(req,res)=>{
     console.log(req.body);
     let ans=calculateSum(req.query.counter);
     let str="hello world and sum is : "+ans;
-    res.send(str);
+    // res.status(201).send(str);
+
+    res.status(202).json({msg:"success"})
 })
 
 app.listen(3000,()=>{
