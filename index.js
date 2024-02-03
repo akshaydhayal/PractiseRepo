@@ -1,6 +1,15 @@
 const express=require("express");
+const bodyParser=require("body-parser");
 
 const app=express();
+
+function middleware1(req,res,next){
+    console.log("from middleware1");
+    next();
+}
+app.use(bodyParser.json());
+app.use(middleware1);
+
 function calculateSum(n){
     let total=0;
     for(let i=0; i<=n; i++){
@@ -10,6 +19,9 @@ function calculateSum(n){
 }
 app.get("/:any",(req,res)=>{
     console.log(req.params.any);
+    console.log(req.query);
+    console.log(req.headers);
+    console.log(req.body);
     let ans=calculateSum(req.query.counter);
     let str="hello world and sum is : "+ans;
     res.send(str);
