@@ -27,7 +27,7 @@ app.get("/:any",(req,res)=>{
     // res.status(201).send(str);
 
     // res.sendFile(__dirname+"/index.html");
-    res.status(202).json({msg:"success"})
+    res.status(202).json({msg:"success", sum:ans})
 })
 
 app.listen(3000,()=>{
