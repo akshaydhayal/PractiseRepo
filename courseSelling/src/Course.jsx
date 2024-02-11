@@ -29,7 +29,7 @@ function Course(){
     return(
         <div style={{display:"flex",padding:"20px"}}>
             {course &&  <CourseCard course={course}/>}
-            <UpdateCard course={course}/>
+            {course && <UpdateCard course={course} courses={courses} setCourses={setCourses}/>}
         </div>
     )
 }
@@ -53,16 +53,28 @@ function UpdateCard(props){
         }).then((response)=>{
             response.json().then((data)=>{
                 console.log(data);
+                let updatedCourses=props.courses.map((c)=>{
+                    if(c.courseId==props.course.courseId){
+                        return({"courseId":props.course.courseId,title,description,imageLink,
+                        "price":150,"published":true});
+                    }else{
+                        return c;
+                    }
+                });
+                console.log("updatedCourse : ");
+                console.log(updatedCourses);
+                props.setCourses(updatedCourses);
             })
         })
     }
     return(<div>
         <Card variant="outlined" style={{width:"400px",padding:"10px"}}>
-            <TextField variant="outlined" label="Course Title" fullWidth
+            <Typography variant="h6">Update Course Details</Typography>
+            <TextField variant="outlined" label={"old title: "+props.course.title} fullWidth
             size="small" margin="normal" onChange={e=>setTitle(e.target.value)}/>
-            <TextField variant="outlined" label="Course Description" fullWidth
+            <TextField variant="outlined" label={"current desc: "+props.course.description} fullWidth
             size="small" margin="normal" onChange={e=>setDescription(e.target.value)}/>
-            <TextField variant="outlined" label="Course Imagelink" fullWidth
+            <TextField variant="outlined" label={"current imageLink : "+props.course.imageLink} fullWidth
             size="small" margin="normal" onChange={e=>setImagelink(e.target.value)}/>
             <Button variant="outlined" onClick={updateCourseCard}>Update Course</Button>
         </Card>
