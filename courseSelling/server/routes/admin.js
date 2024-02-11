@@ -45,6 +45,11 @@ router.get("/courses",adminJwtAuthenticate,async(req,res)=>{
     res.status(201).json(courses);
 });
 
+router.get("/courses/:courseId",adminJwtAuthenticate,async(req,res)=>{
+    const course=await Course.findById(req.params.courseId);
+    res.status(201).json(course);
+});
+
 router.put("/courses/:courseId",adminJwtAuthenticate,async(req,res)=>{
     await Course.findByIdAndUpdate(req.params.courseId,req.body);
     res.status(201).json({msg:"Course updated!!"});
