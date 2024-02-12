@@ -1,5 +1,7 @@
 import {TextField,Button, Typography,Card} from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
+
 function Addcourse(){
     const [title,setTitle]=useState("");
     const [desc,setDesc]=useState("");
@@ -21,21 +23,34 @@ function Addcourse(){
                 setImagelink(e.target.value);
         
             }} fullWidth margin="normal"/>
-            <Button variant="contained" onClick={()=>{
-                fetch("http://localhost:3002/admin/courses",{
-                    method:"POST",
-                    body:JSON.stringify({
-                        title,"description":desc,
-                        "price":100,"published":true,imageLink
-                    }),headers:{
-                        'Content-type':"application/json",
-                        'token':localStorage.getItem("token")
+            <Button variant="contained" onClick={async()=>{
+                const response=await axios.post("http://localhost:3002/admin/courses", {
+                  title,
+                  "description": desc,
+                  "price": 100,
+                  "published": true,
+                  imageLink,
+                },{
+                    headers:{
+                        "token":localStorage.getItem("token"),
+                        "Content-Type":"application/json"
                     }
-                }).then((response)=>{
-                    response.json().then((data)=>{
-                        console.log(data);
-                    })
-                })
+                });
+                console.log(response);
+                // fetch("http://localhost:3002/admin/courses",{
+                //     method:"POST",
+                //     body:JSON.stringify({
+                //         title,"description":desc,
+                //         "price":100,"published":true,imageLink
+                //     }),headers:{
+                //         'Content-type':"application/json",
+                //         'token':localStorage.getItem("token")
+                //     }
+                // }).then((response)=>{
+                //     response.json().then((data)=>{
+                //         console.log(data);
+                //     })
+                // })
             }}  >Add Course</Button>
             </Card>
         </div>
