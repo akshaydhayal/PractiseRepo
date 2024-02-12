@@ -9,7 +9,7 @@ function App() {
     <RecoilRoot>
       <countContext.Provider value={{count,setCount}}>
       <div>
-        <h4>Welcome to Counter game</h4>
+        <h4>Welcome to Counter gamee</h4>
         <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
           <ButtonComponent/>
           <CountComponent/>
