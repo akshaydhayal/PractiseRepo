@@ -4,6 +4,7 @@ const adminSecret="admin";
 const adminJwtAuthenticate=(req,res,next)=>{
     const decodedToken=jwt.verify(req.headers.token,adminSecret);
     if(decodedToken){
+        req.username=decodedToken;
         next();
     }else{
         res.status(403).json({msg:"admin auth failed!!"});

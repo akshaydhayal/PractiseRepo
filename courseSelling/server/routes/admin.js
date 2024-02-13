@@ -9,6 +9,11 @@ const router=express.Router();
 function generateAdminJwt(payload){
     return jwt.sign(payload,adminSecret);
 }
+router.get("/me",adminJwtAuthenticate,(req,res)=>{
+    console.log("came to admin/me.");
+    res.status(201).json({'username':req.username});
+});
+
 router.post("/signup",async(req,res)=>{
     const adminExists=await Admin.findOne({username:req.body.username});
     console.log(adminExists);

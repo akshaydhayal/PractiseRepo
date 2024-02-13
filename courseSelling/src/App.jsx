@@ -7,6 +7,7 @@ import Signin from './Signin.jsx';
 import Addcourse from './Addcourse';
 import Courses from './Courses.jsx';
 import Course from './Course.jsx';
+import Landing from "./Landing.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Router>
         <Navbar/>
           <Routes>
+            <Route path='/' element={<Landing/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path='/signin' element={<Signin/>}/>
             <Route path="/addcourse" element={<Addcourse/>}/>

@@ -1,5 +1,6 @@
 import {TextField, Button, Typography,Card} from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
 
 function Signup(){
     const [username,setUsername]=useState("");
@@ -32,21 +33,30 @@ function Signup(){
               setPassword(e.target.value);
             }}
             />
-          <Button variant="contained" onClick={()=>{
+          <Button variant="contained" onClick={async()=>{
             console.log("hello");
-            fetch("http://localhost:3002/admin/signup",{
-              method:"POST",
-              body:JSON.stringify({
-                username,password
-              }),headers:{
-                'Content-type':"application/json"
-              }
-            }).then((response)=>{
-              response.json().then((data)=>{
-                console.log(data);
-                localStorage.setItem("token",data.token);
-              })
+            const response=await axios.post("http://localhost:3002/admin/signup",{
+              username,password
+            },{headers:{
+              'Content-Type':"application/json"}
             });
+            console.log(response);
+            console.log(response.data);
+            localStorage.setItem("token",response.data.token);
+
+            // fetch("http://localhost:3002/admin/signup",{
+            //   method:"POST",
+            //   body:JSON.stringify({
+            //     username,password
+            //   }),headers:{
+            //     'Content-type':"application/json"
+            //   }
+            // }).then((response)=>{
+            //   response.json().then((data)=>{
+            //     console.log(data);
+            //     localStorage.setItem("token",data.token);
+            //   })
+            // });
           }}>Signup</Button>
             </Card>
           </div>

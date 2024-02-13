@@ -30,11 +30,11 @@ function useLoginStatus(){
   //     console.log(data);
   //   })
   // });
-  return {username,isLoading};
+  return {username,setUsername,isLoading};
 }
 function Navbar() {
     const navigate=useNavigate();
-    let {username,isLoading}=useLoginStatus();
+    let {username,setUsername,isLoading}=useLoginStatus();
   if(isLoading){
     console.log("loading,please wait!")
     return<div>loading..</div>
@@ -67,13 +67,14 @@ function Navbar() {
         </div>
       )}
       {username != "" && (
-        <div>
-          <Typography variant="h6">Hi {username}</Typography>
+        <div style={{display:"flex"}}>
+          <Typography variant="h6" style={{marginRight:"3px"}}>Hi {username}</Typography>
           <Button
             variant="contained"
             onClick={() => {
               localStorage.setItem("token",null);
-              navigate("/signout");
+              setUsername("");
+              navigate("/");
             }}
           >Logout</Button>
         </div>
