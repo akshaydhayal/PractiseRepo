@@ -1,9 +1,12 @@
 import { TextField, Button, Typography, Card } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { userContext } from "./App";
 
+// function Signin(props) {
 function Signin() {
-    const [username,setUsername]=useState("");
+    const {setUsername}=useContext(userContext);
+    const [username,setUsernamee]=useState("");
     const [password,setPassword]=useState("");
   return (
     <div style={{ marginTop: "150px" }}>
@@ -23,7 +26,7 @@ function Signin() {
           style={{ marginTop: "20px" }}
           margin="normal"
           onChange={(e)=>{
-            setUsername(e.target.value);
+            setUsernamee(e.target.value);
           }}
           />
         <TextField
@@ -43,7 +46,7 @@ function Signin() {
           });
           console.log(response.data);
           localStorage.setItem("token",response.data.token);
-
+          setUsername(username);
           // fetch("http://localhost:3002/admin/login", {
           //     method: "POST",
           //     body: JSON.stringify({

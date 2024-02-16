@@ -1,9 +1,13 @@
 import {TextField, Button, Typography,Card} from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import { userContext } from "./App";
 
 function Signup(){
-    const [username,setUsername]=useState("");
+  const {setUsername}=useContext(userContext);
+  const navigate=useNavigate();
+  const [username,setUsernamee]=useState("");
     const [password,setPassword]=useState("");
     return (
       <div style={{marginTop:"150px"}}>
@@ -20,7 +24,7 @@ function Signup(){
             style={{marginTop:"20px"}}
             margin="normal"
             onChange={(e)=>{
-              setUsername(e.target.value);
+              setUsernamee(e.target.value);
             }}
             />
           <TextField
@@ -42,8 +46,9 @@ function Signup(){
             });
             console.log(response);
             console.log(response.data);
+            setUsername(username)
             localStorage.setItem("token",response.data.token);
-
+            navigate("/courses");
             // fetch("http://localhost:3002/admin/signup",{
             //   method:"POST",
             //   body:JSON.stringify({
