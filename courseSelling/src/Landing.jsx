@@ -1,7 +1,10 @@
 import {Typography,Button,Grid} from "@mui/material";
+import { useContext } from "react";
 import {useNavigate} from "react-router-dom";
+import { userContext } from "./App";
 
 function Landing(){
+    const {username}=useContext(userContext);
     const navigate=useNavigate();
     return (
       <div
@@ -17,7 +20,8 @@ function Landing(){
             <div style={{marginLeft:"10px",marginTop:"60px" }}>
               <Typography variant="h3">Coursera Admin</Typography>
               <Typography variant="h7">A place to learn, earn and grow</Typography>
-              <div style={{ marginTop: "25px" }}>
+              {
+                username=="" && <div style={{ marginTop: "25px" }}>
                 <Button variant="contained" style={{ marginRight: "15px" }} onClick={()=>{
                     navigate("/signup");
                 }}>SIGNUP</Button>
@@ -25,6 +29,7 @@ function Landing(){
                     navigate("/signin");
                 }}>SIGNIN</Button>
               </div>
+              }
             </div>
           </Grid>
 
