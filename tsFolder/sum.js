@@ -15,6 +15,13 @@ function sum1(a, b, op) {
 }
 let ans1 = sum1(1, 3, "sub");
 console.log(ans1);
+var ArithmeticOp;
+(function (ArithmeticOp) {
+    ArithmeticOp[ArithmeticOp["Add"] = 0] = "Add";
+    ArithmeticOp[ArithmeticOp["Sub"] = 1] = "Sub";
+    ArithmeticOp[ArithmeticOp["Mul"] = 2] = "Mul";
+    ArithmeticOp[ArithmeticOp["Div"] = 3] = "Div";
+})(ArithmeticOp || (ArithmeticOp = {}));
 function greetBird(bird) {
     return "Hi " + bird.name + " ,your age is : " + bird.age + " and he lives in " + JSON.stringify(bird.address);
 }
