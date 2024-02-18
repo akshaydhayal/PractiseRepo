@@ -2,10 +2,14 @@ import { TextField, Button, Typography, Card } from "@mui/material";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { userContext } from "./App";
+import { useSetRecoilState } from "recoil";
+import { userState } from "./store/user.js";
+import {useNavigate} from "react-router-dom";
 
-// function Signin(props) {
 function Signin() {
-    const {setUsername}=useContext(userContext);
+    const navigate=useNavigate();
+    // const {setUsername}=useContext(userContext);
+    const setUser=useSetRecoilState(userState);
     const [username,setUsernamee]=useState("");
     const [password,setPassword]=useState("");
   return (
@@ -46,22 +50,8 @@ function Signin() {
           });
           console.log(response.data);
           localStorage.setItem("token",response.data.token);
-          setUsername(username);
-          // fetch("http://localhost:3002/admin/login", {
-          //     method: "POST",
-          //     body: JSON.stringify({
-          //       username,
-          //       password,
-          //     }),
-          //     headers: {
-          //       "Content-type": "application/json",
-          //     },
-          //   }).then((response) => {
-          //     response.json().then((data) => {
-          //       console.log(data);
-          //       localStorage.setItem("token",data.token);
-          //     });
-          //   });
+          setUser({username,isLoading:false});
+          navigate("/courses");
         }}>Signin</Button>
       </Card>
       </div>

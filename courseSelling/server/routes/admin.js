@@ -10,7 +10,7 @@ function generateAdminJwt(payload){
     return jwt.sign(payload,adminSecret);
 }
 router.get("/me",adminJwtAuthenticate,(req,res)=>{
-    console.log("came to admin/me.");
+    console.log("came to admin/me..");
     res.status(201).json({'username':req.username});
 });
 
@@ -56,8 +56,9 @@ router.get("/courses/:courseId",adminJwtAuthenticate,async(req,res)=>{
 });
 
 router.put("/courses/:courseId",adminJwtAuthenticate,async(req,res)=>{
-    await Course.findByIdAndUpdate(req.params.courseId,req.body);
-    res.status(201).json({msg:"Course updated!!"});
+    const updatedCourse=await Course.findByIdAndUpdate(req.params.courseId,req.body,
+        {returnDocument:"after"});
+    res.status(201).json({msg:"Course updated!!",updatedCourse});
 });
 
 module.exports=router;

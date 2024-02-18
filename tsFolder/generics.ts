@@ -30,7 +30,7 @@ console.log(ans5);
 type UserUpdate = Partial<User>; // now UserUpdate is just User interface but with all fields set as options
 
 function updateUser(id: number, user: UserUpdate) {
-    console.log("user updated");
+    console.log("user updated");                                  
 }
 updateUser(1, {});
 updateUser(1, { name: "AKSHAY" }); //not necesaary to give all fileds as all field are options

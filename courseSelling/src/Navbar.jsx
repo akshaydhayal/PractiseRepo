@@ -2,41 +2,23 @@ import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState,useContext } from "react";
 import { userContext } from "./App.jsx";
+import { useSetRecoilState,useRecoilState } from "recoil";
+import { userState } from "./store/user.js";
 
-// function useLoginStatus() {
-//   const [isLoading, setIsloading] = useState(true);
-//   const [username, setUsername] = useState("");
-//   useEffect(() => {
-//     fetch("http://localhost:3002/admin/me", {
-//       method: "GET",
-//       headers: {
-//         token: localStorage.getItem("token"),
-//       },
-//     }).then((response) => {
-//       response.json().then((data) => {
-//         setUsername(data.username);
-//         setIsloading(false);
-//         console.log(data);
-//       });
-//     });
-//   }, []);
-  
-//   return { username, setUsername, isLoading };
-// }
 function Navbar() {
-// function Navbar({username, setUsername,isLoading}) {
-  const {username,setUsername,isLoading}=useContext(userContext);
-  console.log("username"+username);
+  // const {username,setUsername,isLoading}=useContext(userContext);
+  const [user,setUser]=useRecoilState(userState);
+
+  console.log("username"+user.username);
   const navigate = useNavigate();
-  // let { username, setUsername, isLoading } = useLoginStatus();
-  if (isLoading) {
+  if (user.isLoading) {
     return <div>loading..</div>;
   }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Typography variant="h6" onClick={()=>navigate("/")}>Coursera</Typography>
 
-      {username === "" && (
+      {user.username === "" && (
         <div>
           <Button
             variant="contained"
@@ -57,10 +39,10 @@ function Navbar() {
           </Button>
         </div>
       )}
-      {username != "" && (
+      {user.username != "" && (
         <div style={{ display: "flex" }}>
           <Typography variant="h6" style={{ marginRight: "3px" }}>
-            Hi {username}
+            Hi {user.username}
           </Typography>
 
           <Button variant="outlined" onClick={()=>navigate("/addcourse")}>ADD COURSE</Button>
@@ -69,7 +51,7 @@ function Navbar() {
             variant="contained"
             onClick={() => {
               localStorage.setItem("token", null);
-              setUsername("");
+              setUser({...user,username:""})
               navigate("/");
             }}
           >

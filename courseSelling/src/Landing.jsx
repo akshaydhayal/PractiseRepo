@@ -2,9 +2,12 @@ import {Typography,Button,Grid} from "@mui/material";
 import { useContext } from "react";
 import {useNavigate} from "react-router-dom";
 import { userContext } from "./App";
+import { useRecoilValue } from "recoil";
+import { userState } from "./store/user.js";
 
 function Landing(){
-    const {username}=useContext(userContext);
+    // const {username}=useContext(userContext);
+    const user=useRecoilValue(userState);
     const navigate=useNavigate();
     return (
       <div
@@ -21,7 +24,7 @@ function Landing(){
               <Typography variant="h3">Coursera Admin</Typography>
               <Typography variant="h7">A place to learn, earn and grow</Typography>
               {
-                username=="" && <div style={{ marginTop: "25px" }}>
+                user.username=="" && <div style={{ marginTop: "25px" }}>
                 <Button variant="contained" style={{ marginRight: "15px" }} onClick={()=>{
                     navigate("/signup");
                 }}>SIGNUP</Button>

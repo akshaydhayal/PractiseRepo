@@ -3,9 +3,13 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { userContext } from "./App";
+import { useSetRecoilState } from "recoil";
+import {userState} from "./store/user.js";
 
 function Signup(){
-  const {setUsername}=useContext(userContext);
+  const setUser=useSetRecoilState(userState);
+  // const {setUsername}=useContext(userContext);
+
   const navigate=useNavigate();
   const [username,setUsernamee]=useState("");
     const [password,setPassword]=useState("");
@@ -44,9 +48,8 @@ function Signup(){
             },{headers:{
               'Content-Type':"application/json"}
             });
-            console.log(response);
             console.log(response.data);
-            setUsername(username)
+            setUser({username,isLoading:false});
             localStorage.setItem("token",response.data.token);
             navigate("/courses");
             // fetch("http://localhost:3002/admin/signup",{
