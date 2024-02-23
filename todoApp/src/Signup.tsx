@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-    const [username,setUsername]=useState("");
+  const navigate=useNavigate();
+  const [username,setUsername]=useState("");
     const [password,setPassword]=useState("");
   return (
     <div
@@ -22,7 +24,8 @@ function Signup() {
             );
             console.log(response.data);
             localStorage.setItem("todoToken",response.data.token);
-            window.location="/todos";
+            // window.location="/todos";
+            navigate("/todos");
         }}>Signup</button>
       </div>
     </div>

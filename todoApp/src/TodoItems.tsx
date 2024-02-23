@@ -2,8 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface Todo{
+  title:string;
+  description:string;
+  completed:boolean;
+}
+type todoType=Todo[];
+
 function TodoItems() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   return (
     <div>
       <Header />
@@ -43,7 +50,10 @@ function Header() {
   );
 }
 
-function AddTodo({ setTodos, todos }) {
+function AddTodo(props) {
+// function AddTodo({ setTodos, todos }) {
+  const todos=props.todos;
+  const setTodos=props.setTodos;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   return (
@@ -83,14 +93,19 @@ function AddTodo({ setTodos, todos }) {
   );
 }
 
-function GetTodos({ setTodos, todos }) {
+// function GetTodos({ setTodos, todos:Todo[]}) {
+function GetTodos(props) {
+  const todos:Todo[]=props.todos;
+  const setTodos=props.setTodos;
   useEffect(() => {
     async function getData() {
       const response = await axios.get("http://localhost:3001/todos", {
         headers: { token: localStorage.getItem("todoToken") },
       });
       console.log(response.data);
-      setTodos(response.data);
+      const data:Todo[]=response.data;
+      setTodos(data);
+      // setTodos(response.data);
     }
     getData();
   }, []);
