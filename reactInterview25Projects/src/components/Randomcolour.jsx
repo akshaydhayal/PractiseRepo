@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function RandomColour(){
-    const [hex,setHex]=useState("");
+    const [hex,setHex]=useState("#a281d3");
     const [rgb,setRgb]=useState("");
     const [typeColour,setTypeColour]=useState("hex");
     function getHexDigit(n){

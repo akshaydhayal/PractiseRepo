@@ -3,6 +3,7 @@ import Accordian from './components/Accordion/Accordian'
 import './App.css'
 import RandomColour from './components/Randomcolour';
 import ImageSlider from './components/ImageSlider';
+import LoadMoreData from './components/LoadMoreData';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Accordian/>
       <RandomColour/>
       <ImageSlider/>
+      <LoadMoreData/>
     </div>
   )
 }
