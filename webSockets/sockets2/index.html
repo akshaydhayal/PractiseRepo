@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="get-socket">Get socket id</button>
+    <h1 id="socket">NULL</h1>
+    <input id="msg" type="text" placeholder="enter msg"/>
+    <input id="socketId" type="text" placeholder="enter socket id"/>
+    <button id="send-btn">Send message</button>
+    <input id="roomId" type="text" placeholder="enter room to join"/>
+    <button id="joinRoom">Join room</button>
+    <div id="messages">
+
+    </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let socket=io();
+    
+    const sendBtn=document.getElementById("send-btn");
+    sendBtn.addEventListener("click",()=>{
+        const msgContent=document.getElementById("msg").value
+        const socketIdContent=document.getElementById("socketId").value;
+        const groupId=document.getElementById("roomId").value;
+        console.log(msgContent);
+        console.log(socketIdContent);
+        // socket.emit("chat-msg",msgContent);
+        // socket.emit("p2p-chat-msg",{msgContent,socketIdContent});
+        socket.emit("group-chat-msg",{msgContent,groupId});
+        // socket.emit("group-chat-msg",msgContent);
+    })
+
+    const msgParent=document.getElementById("messages");
+    socket.on("chat-msg",(msg)=>{
+        const child=document.createElement("div");
+        child.innerHTML=msg;
+        msgParent.appendChild(child);
+    })
+    socket.on("p2p-chat-msg",(msg)=>{
+        const child=document.createElement("div");
+        child.innerHTML=msg;
+        msgParent.appendChild(child);
+    })
+    socket.on("group-chat-msg",(msg)=>{
+        console.log(msg);
+        const child=document.createElement("div");
+        child.innerHTML=msg;
+        msgParent.appendChild(child);
+    })
+    
+    document.getElementById("get-socket").addEventListener("click",()=>{
+        document.getElementById("socket").innerHTML=socket.id;
+    })
+
+    document.getElementById("joinRoom").addEventListener("click",()=>{
+        const room=document.getElementById("roomId").value;
+        socket.emit("join",room);
+    })
+</script>
+</html>
