@@ -1,40 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LeetCode Clone
 
-## Getting Started
+Live Project Link : [https://leetcode-clone-zltt.onrender.com/](https://leetcode-clone-zltt.onrender.com/)
 
-First, run the development server:
+## Description
+This project is a LeetCode clone, providing a platform for users to practice coding problems, submit their solutions, and view leaderboards. It is built using Next.js for frontend, Express.js for the backend and MongoDB for database storage.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **Problem List**: Users can view a list of all available coding problems.
+- **Individual Problem View**: Users can view details of each individual problem and submit their solutions.
+- **Submission List**: Users can view a list of all submissions made for coding problems.
+- **Leaderboard**: Users can view a leaderboard ranking based on points scored.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Website Demo
+![Demo](https://github.com/akshaydhayal/leetcode-clone/blob/main/leetcode.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Frontend**: Next.js, Tailwind CSS
+- **Backend**: Node.js, Express.js,
+- **Database**: MongoDB(for user data),   Cloudinary (for storing user files)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Endpoints
+- **See All Problems List**: `GET /problems`
+- **See Each Individual Problem and Solve It**: `GET /problems/:id`
+- **Submission List**: `GET /submissions`
+- **Leaderboard**: `GET /leaderboard`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## MongoDB Collections
+- **ProblemList**
+  - Fields: `title`,`description` `topic tags`, `difficulty`, `points`, `hints`, `examples`, `constraints`
+- **SubmissionList**
+  - Fields: `problemSubmitted`, `solvedStatus`, `submitTime`, `user`
+- **UserList**
+  - Fields: `name`, `avatar`, `pointsScored`, `college`, `email`, `problems solved`
 
-## Learn More
+## Setup Instructions
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Set up environment variables in a `.env` file.
+4. Start the server using `npm start`.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+This project is licensed under the MIT License.
